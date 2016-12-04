@@ -25,5 +25,7 @@ namespace ECourse.Models
         {
             base.Dispose(disposing);
         }
+
+        public DbSet<User> Users { get; set; }
     }
 }
