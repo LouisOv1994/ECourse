@@ -69,32 +69,30 @@ namespace ECourse.Controllers
                         UserHelper.CreateUserASP(user.UserName, "Teacher");
                     }
 
-                    return RedirectToAction("Index");
+                    if (user.FilePhoto != null)
+                    {
+                        var folder = "~/Content/Photos/Users";
+                        var name = string.Format("{0}.Jpg", user.UserId);
 
+                        var response = FileHelper.UploadPhoto(user.FilePhoto, folder, name);
+                        if (response)
+                        {
+                            var pic = string.Format("{0}/{1}", folder, name);
+                            user.Photo = pic;
+
+
+                            db.Entry(user).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
                     ModelState.AddModelError(string.Empty,
                         "Se produjo un Error a la Hora de Registrar este usuario");
                 }
-
-                if (user.FilePhoto != null)
-                {
-                    var folder = "~/Content/Photos/Users";
-                    var name = string.Format("{0}.Jpg", user.UserId);
-
-                    var response = FileHelper.UploadPhoto(user.FilePhoto, folder, name);
-                    if (response)
-                    {
-                        var pic = string.Format("{0}/{1}", folder, name);
-                        user.Photo = pic;
-
-
-                        db.Entry(user).State = EntityState.Modified;
-                        db.SaveChanges();
-                    }
-                }
-
             }
 
             return View(user);
