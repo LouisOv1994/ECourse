@@ -157,7 +157,7 @@ namespace ECourse.Controllers
                 .Where(d => d.UserId == department.UserId).AsNoTracking()
                 .FirstOrDefault();
 
-            if (duplicatedepartment != null && duplicatedepartment.DepartmentID != department.DepartmentID)
+            if (duplicatedepartment != null && duplicatedepartment.DepartmentId != department.DepartmentId)
             {
                 string errorMessage = String.Format(
                "El Docente {0} ya es administrador del departamento {1}.",

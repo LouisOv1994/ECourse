@@ -29,5 +29,7 @@ namespace ECourse.Models
         public DbSet<User> Users { get; set; }
 
         public System.Data.Entity.DbSet<ECourse.Models.Department> Departments { get; set; }
+
+        public System.Data.Entity.DbSet<ECourse.Models.Course> Courses { get; set; }
     }
 }

@@ -21,6 +21,17 @@ namespace ECourse.Helper
             return users.OrderBy(i => i.FirstName).ThenBy(i => i.LastName).ToList();
         }
 
+        public static List<Department> GetDepartment()
+        {
+            var departments = db.Departments.ToList();
+            departments.Add(new Department
+            {
+                UserId = 0,
+                Name = "[Seleccionar Departamento...]"
+            });
+            return departments.OrderBy(i => i.Name).ToList();
+        }
+
         public void Dispose()
         {
             db.Dispose();

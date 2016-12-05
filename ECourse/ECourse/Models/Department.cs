@@ -9,7 +9,7 @@ namespace ECourse.Models
     public class Department
     {
         [Key]
-        public int DepartmentID { get; set; }
+        public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "el campo {0} es obligatorio.")]
         [Range(1, double.MaxValue, ErrorMessage = "debes seleccionar un administrador para el departamento")]
@@ -20,9 +20,10 @@ namespace ECourse.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        [Display(Name = "Fecha de Registro")]
+        [Display(Name = "Fecha de Creacion")]
         public DateTime CreateDate { get; set; }
 
         public virtual User Administrator { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }

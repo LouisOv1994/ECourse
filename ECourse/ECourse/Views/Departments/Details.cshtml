@@ -48,6 +48,50 @@
 </div>
 
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.DepartmentID }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Editar", "Edit", new { id = Model.DepartmentId }, new { @class = "btn btn-warning" })
     @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-success" })
 </p>
+<h3>Cursos</h3>
+<table class="table">
+    <tr>
+        <th>
+            Titulo
+        </th>
+        <th>
+            Descripcion
+        </th>
+        <th>
+            Modalidad
+        </th>
+        <th>
+            Horas
+        </th>
+        <th>
+            Fecha de Creacion
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Courses)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+        </tr>
+    }
+
+</table>
