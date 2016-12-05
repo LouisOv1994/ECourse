@@ -54,7 +54,7 @@ namespace ECourse.Models
         [Display(Name = "Profesor")]
         public bool IsTeacher { get; set; }
 
-        [Display(Name ="Fecha de Creacion")]
+        [Display(Name ="Fecha de Ingreso")]
         public DateTime CreateUser { get; set; }
 
         [NotMapped]

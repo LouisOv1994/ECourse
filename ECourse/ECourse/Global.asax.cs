@@ -1,6 +1,7 @@
 ﻿using ECourse.Helper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -14,6 +15,8 @@ namespace ECourse
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion
+                <Models.ECourseContext, Migrations.Configuration>());
             AreaRegistration.RegisterAllAreas();
             this.CheckRolesAndSuperUser();
             GlobalConfiguration.Configure(WebApiConfig.Register);

@@ -1,0 +1,53 @@
+﻿@model ECourse.Models.Department
+
+@{
+    ViewBag.Title = "Detalles Departamento";
+}
+
+<h2>Detalles</h2>
+
+
+<h4>Departamentos</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Administrator.FullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Administrator.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.Administrator.Photo))
+        {
+            <img src="@Url.Content(Model.Administrator.Photo)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.DepartmentID }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-success" })
+</p>
