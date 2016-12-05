@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ECourse.Models;
 using ECourse.Helper;
+using ECourse.ViewModels;
+
 
 namespace ECourse.Controllers
 {
@@ -190,6 +192,73 @@ namespace ECourse.Controllers
             }
 
             return View(user);
+        }
+
+        public ActionResult AddToCourse(int? id,int? courseId)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = db.Users.Find(id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new AddToCourses();
+
+            viewModel.UserId = id.Value;
+            viewModel.Courses = db.Courses
+                .Where(c => c.IsActive)
+                .OrderBy(c => c.Title)
+                .ToList();
+
+            if (courseId != null)
+            {
+                var asignar = new TeacherToCourse
+                {
+                    UserId = id.Value,
+                    CourseId = courseId.Value
+                };
+                var exist = db.TeacherToCourses
+                    .Where(t => t.CourseId == courseId && t.UserId == user.UserId)
+                    .FirstOrDefault();
+
+                if (exist == null)
+                {
+                    db.TeacherToCourses.Add(asignar);
+                    db.SaveChanges();
+                    return RedirectToAction(string.Format("AddToCourse/{0}", id.Value));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "El docente ya esta asignado a este curso");
+                }
+            }
+            
+            return View(viewModel);
+        }
+
+        public ActionResult DeleteCourse(int? courseid)
+        {
+            var course = db.TeacherToCourses
+                .Where(c => c.CourseId == courseid.Value).FirstOrDefault();
+
+            try
+            {
+                db.TeacherToCourses.Remove(course);
+                db.SaveChanges();
+                return RedirectToAction(string.Format("Details/{0}", course.UserId));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "El docente ya esta asignado a este curso");
+            }
+
+            return View(course);
         }
 
         protected override void Dispose(bool disposing)

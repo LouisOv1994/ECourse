@@ -92,3 +92,44 @@
     @Html.ActionLink("Editar", "Edit", new { id = Model.UserId }, new { @class = "btn btn-warning" })
     @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-success" })
 </p>
+
+<table class="table">
+    <tr>
+        <th>
+            Titulo
+        </th>
+        <th>
+            Modalidad
+        </th>
+        <th>
+            Departamento
+        </th>
+        <th>
+            Horas
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.TeacherToCourses)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Modality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Department.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Hours)
+            </td>
+            <td>
+                @Html.ActionLink("Retirar", "DeleteCourse", new { courseid = item.CourseId }, new { @class = "btn btn-danger", onclick = "return confirm('Estas seguro de Retirar el curso?')" })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -59,5 +59,7 @@ namespace ECourse.Models
 
         [NotMapped]
         public HttpPostedFileBase FilePhoto { get; set; }
+
+        public virtual ICollection<TeacherToCourse> TeacherToCourses { get; set; }
     }
 }

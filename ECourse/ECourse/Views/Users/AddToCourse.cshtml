@@ -1,0 +1,59 @@
+﻿@model ECourse.ViewModels.AddToCourses
+@{
+    ViewBag.Title = "Asignar Curso";
+}
+
+<h3>Asignar <small>Cursos</small></h3>
+
+@Html.HiddenFor(model => model.UserId)
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<table class="table">
+    <tr>
+        <th>
+            Titulo
+        </th>
+        <th>
+            Modalidad
+        </th>
+        <th>
+            Departamento
+        </th>
+        <th>
+            Horas
+        </th>
+        <th>
+            Fecha de Creacion
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Courses)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+
+                @Html.ActionLink("Asignar", "AddToCourse", new { courseId = item.CourseId }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

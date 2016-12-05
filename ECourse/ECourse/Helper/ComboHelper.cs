@@ -10,6 +10,18 @@ namespace ECourse.Helper
     {
         private static ECourseContext db = new ECourseContext();
 
+
+        public static List<Course> GetCourse()
+        {
+            var courses = db.Courses.Where(u => u.IsActive).ToList();
+            courses.Add(new Course
+            {
+                CourseId = 0,
+                Title = "[Seleccionar Curso...]"
+            });
+            return courses.OrderBy(i => i.Title).ThenBy(i => i.CreationDate).ToList();
+        }
+
         public static List<User> GetTeacher()
         {
             var users = db.Users.Where(u => u.IsTeacher).ToList();

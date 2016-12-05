@@ -42,6 +42,7 @@ namespace ECourse.Models
         public bool IsActive { get; set; }
 
         public virtual Department Department { get; set; }
+        public virtual ICollection<TeacherToCourse> TeacherToCourses { get; set; }
     }
 
     public enum Modalities

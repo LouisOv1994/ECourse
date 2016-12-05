@@ -18,6 +18,7 @@ namespace ECourse.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder); 
         }
 
@@ -28,8 +29,12 @@ namespace ECourse.Models
 
         public DbSet<User> Users { get; set; }
 
-        public System.Data.Entity.DbSet<ECourse.Models.Department> Departments { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
-        public System.Data.Entity.DbSet<ECourse.Models.Course> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<TeacherToCourse> TeacherToCourses { get; set; }
     }
 }
