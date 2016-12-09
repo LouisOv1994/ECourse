@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ECourse.Models;
 using ECourse.Helper;
+using ECourse.ViewModels;
 
 namespace ECourse.Controllers
 {
@@ -19,6 +20,57 @@ namespace ECourse.Controllers
         {
             var groups = db.Groups.Include(g => g.Courses).Include(g => g.Instructor);
             return View(groups.ToList());
+        }
+
+        public ActionResult AddToStudent(int? id, int? userid)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var group = db.Groups.Find(id);
+
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new AddToStudents();
+
+            viewModel.GroupId = id.Value;
+            viewModel.Users = db.Users
+                .Where(c => c.IsStudent == true && c.GroupDetailsTmp.Count() == 0)
+                .OrderBy(c => c.CreateUser)
+                .ToList();
+
+            if (userid != null)
+            {
+                var asignar = new GroupDetailTmp
+                {
+                    UserId = userid.Value,
+                    GroupId = id.Value,
+                    EnrollmentDate = DateTime.Now,
+                    IsActive = false
+                };
+
+                var exist = db.GroupDetails
+                    .Where(t => t.GroupId == id && t.UserId == userid)
+                    .FirstOrDefault();
+
+                if (exist == null)
+                {
+                    db.GroupDetailsTmp.Add(asignar);
+                    db.SaveChanges();
+                    return RedirectToAction(string.Format("AddToStudent/{0}", id.Value));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "El estudiante ya esta asignado a este grupo");
+                }
+            }
+
+            return View(viewModel);
         }
 
         public ActionResult Details(int? id)

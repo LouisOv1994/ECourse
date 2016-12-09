@@ -53,7 +53,10 @@
             @Html.DisplayFor(modelItem => item.CreateUser)
         </td>
         <td>
-            @Html.ActionLink("Asignar", "AddToCourse", new { id = item.UserId }, new { @class = "btn btn-primary" })
+            @if (item.IsTeacher)
+            {
+                @Html.ActionLink("Asignar", "AddToCourse", new { id = item.UserId }, new { @class = "btn btn-primary" })
+            }
             @Html.ActionLink("Editar", "Edit", new { id=item.UserId }, new { @class = "btn btn-warning" })
             @Html.ActionLink("Detalles", "Details", new { id=item.UserId }, new { @class = "btn btn-info" })
             @Html.ActionLink("Eliminar", "Delete", new { id=item.UserId }, new { @class = "btn btn-danger" })

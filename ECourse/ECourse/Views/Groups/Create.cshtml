@@ -1,17 +1,16 @@
 ﻿@model ECourse.Models.Group
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Grupo";
 }
 
-<h2>Create</h2>
+<h2>Crear <small>Grupos</small></h2>
 
 @using (Html.BeginForm("Create", "Groups", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Group</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

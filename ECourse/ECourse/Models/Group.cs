@@ -39,5 +39,7 @@ namespace ECourse.Models
         public HttpPostedFileBase FilePhoto { get; set; }
         public virtual Course Courses { get; set; }
         public virtual User Instructor { get; set; }
+        public virtual ICollection<GroupDetail> GroupDetails { get; set; }
+        public virtual ICollection<GroupDetailTmp> GroupDetailsTmp { get; set; }
     }
 }

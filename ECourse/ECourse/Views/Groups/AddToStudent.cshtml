@@ -1,0 +1,48 @@
+﻿@model ECourse.ViewModels.AddToStudents
+@{
+    ViewBag.Title = "Asignar Estudiantes";
+}
+
+<h3>Asignar <small>Estudiantes</small></h3>
+
+<p>
+    @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-success" })
+</p>
+
+@Html.HiddenFor(model => model.GroupId)
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre Completo
+        </th>
+        <th>
+            Correo Electronico
+        </th>
+        <th>
+           Fecha de Registro
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateUser)
+            </td>
+            <td>
+
+                @Html.ActionLink("Asignar", "AddToStudent", new { userid = item.UserId }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

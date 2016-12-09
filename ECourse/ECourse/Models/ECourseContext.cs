@@ -27,6 +27,8 @@ namespace ECourse.Models
             base.Dispose(disposing);
         }
 
+        public DbSet<GroupDetail> GroupDetails { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<Department> Departments { get; set; }
@@ -36,5 +38,7 @@ namespace ECourse.Models
         public DbSet<Group> Groups { get; set; }
 
         public DbSet<TeacherToCourse> TeacherToCourses { get; set; }
+
+        public DbSet<GroupDetailTmp> GroupDetailsTmp { get; set; }
     }
 }

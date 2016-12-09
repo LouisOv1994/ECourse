@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -61,5 +62,7 @@ namespace ECourse.Models
         public HttpPostedFileBase FilePhoto { get; set; }
 
         public virtual ICollection<TeacherToCourse> TeacherToCourses { get; set; }
+        public virtual ICollection<GroupDetail> GroupDetails { get; set; }
+        public virtual ICollection<GroupDetailTmp> GroupDetailsTmp { get; set; }
     }
 }
